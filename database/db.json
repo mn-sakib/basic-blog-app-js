@@ -1,0 +1,12 @@
+{
+  "posts": [
+    {
+      "id": "dd31",
+      "author": "Sakib",
+      "title": "This is a sample blog post title 1",
+      "post": "const getTime = new Date().getTime();\nconsole.log(getTime);",
+      "time": 1747592020898
+    }
+  ],
+  "comments": []
+}
