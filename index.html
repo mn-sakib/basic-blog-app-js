@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD Blog App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body style="background: #f0f2f5">
+    <div class="container py-4">
+      <!-- Statistics and Input Section -->
+      <div class="row mb-4">
+        <div class="col-lg-8 mx-auto">
+          <div class="card border-0 shadow-sm" style="border-radius: 16px">
+            <div class="card-body p-4">
+              <!-- Statistics Row -->
+              <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                  <div class="d-flex align-items-center bg-white rounded-3 p-3 border">
+                    <div class="rounded-circle bg-primary bg-gradient p-2 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                    <div class="ms-3">
+                      <h5 class="mb-0 fw-semibold">150</h5>
+                      <small class="text-muted">Total Posts</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="d-flex align-items-center bg-white rounded-3 p-3 border">
+                    <div class="rounded-circle bg-success bg-gradient p-2 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                      <i class="fas fa-eye text-white"></i>
+                    </div>
+                    <div class="ms-3">
+                      <h5 class="mb-0 fw-semibold">1.2K</h5>
+                      <small class="text-muted">Total Views</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="d-flex align-items-center bg-white rounded-3 p-3 border">
+                    <div class="rounded-circle bg-info bg-gradient p-2 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                      <i class="fas fa-comments text-white"></i>
+                    </div>
+                    <div class="ms-3">
+                      <h5 class="mb-0 fw-semibold">500</h5>
+                      <small class="text-muted">Total Comments</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Create Post Section -->
+              <div class="mb-0">
+                <div class="input-group">
+                  <input 
+                    type="text" 
+                    class="form-control py-2" 
+                    placeholder="Write your post here..."
+                    style="border-radius: 8px 0 0 8px; border-right: none;"
+                  >
+                  <button 
+                    class="btn btn-primary px-4" 
+                    style="border-radius: 0 8px 8px 0;"
+                  >
+                    <i class="fas fa-plus me-2"></i>Create Post
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Posts -->
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="card border-0 shadow-sm" style="border-radius: 16px">
+            <div class="card-header bg-white border-0 p-4">
+              <div class="d-flex align-items-center">
+                <img 
+                  src="https://ui-avatars.com/api/?name=MD+NAJMUS+SAKIB&background=random" 
+                  class="rounded-circle border"
+                  width="40" 
+                  height="40"
+                  alt="Profile"
+                >
+                <div class="ms-3">
+                  <h6 class="mb-0 fw-semibold">MD NAJMUS SAKIB</h6>
+                  <small class="text-muted">Posted 2 hours ago</small>
+                </div>
+              </div>
+            </div>
+            <div class="card-body px-4 pb-4">
+              <p class="mb-4" style="font-size: 15px;">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusamus consequuntur animi reprehenderit id, distinctio
+                reiciendis quae doloremque, cumque exercitationem facere eos
+                nobis esse, cupiditate nisi ipsam pariatur perspiciatis qui
+                assumenda.
+              </p>
+              
+              <div class="d-flex gap-2">
+                <button class="btn btn-light border px-3 py-1">
+                  <i class="fas fa-edit me-2"></i>Edit
+                </button>
+                <button class="btn btn-light border px-3 py-1">
+                  <i class="fas fa-trash-alt me-2"></i>Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
