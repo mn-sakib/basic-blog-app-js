@@ -1,12 +1,18 @@
 {
   "posts": [
     {
-      "id": "dd31",
-      "author": "Sakib",
-      "title": "This is a sample blog post title 1",
-      "post": "const getTime = new Date().getTime();\nconsole.log(getTime);",
-      "time": 1747592020898
+      "id": "f49f",
+      "author": "Md Najmus Sakib",
+      "title": "This is a sample blog post title 2",
+      "post": "This is a sample blog post title. This is a sample blog post title. This is a sample blog post title.",
+      "time": 1747653016743
     }
   ],
-  "comments": []
+  "comments": [],
+  "counter": [
+    {
+      "id": "1c6f",
+      "views": 319
+    }
+  ]
 }

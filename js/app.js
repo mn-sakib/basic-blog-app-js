@@ -2,15 +2,35 @@ const authorInput = document.querySelector("#authorInput");
 const titleInput = document.querySelector("#titleInput");
 const textInput = document.querySelector("#textInput");
 const createBtn = document.querySelector("#createBtn");
+const editBtn = document.querySelector("#editBtn");
+
+// localStorage.clear("authorName");
+function saveAuthor() {
+  const authorName = authorInput.value.trim();
+  const hasAuthor = localStorage.getItem("authorName");
+
+  if (hasAuthor) {
+    authorInput.value = hasAuthor;
+    authorInput.disabled = true;
+    authorInput.ariaReadOnly = true;
+    return hasAuthor;
+  } else {
+    if (authorName === "") {
+      console.log("Author name not found!");
+    } else {
+      localStorage.setItem("authorName", authorName);
+      return authorName;
+    }
+  }
+}
 
 const getTime = new Date().getTime();
-console.log(getTime);
 
 const API_URL = "http://localhost:3000/posts";
 
 async function createPost() {
   const posts = {
-    author: authorInput.value.trim(),
+    author: saveAuthor(),
     title: titleInput.value.trim(),
     post: textInput.value.trim(),
     time: getTime,
@@ -79,11 +99,19 @@ function createPostElements(post) {
 
   const authorName = document.createElement("h6");
   authorName.className = "mb-0 fw-semibold";
-  authorName.textContent = post.author;
+  authorName.textContent = post.author.toUpperCase();
+
+  const timeDifference = getTime - post.time;
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = (minutes / 60).toFixed(2);
+  const days = hours / 24;
+  const months = days / 30;
+  console.log(hours);
 
   const postTime = document.createElement("small");
   postTime.className = "text-muted";
-  postTime.textContent = `Posted ${post.time} ago`;
+  postTime.textContent = `Posted ${hours} hours ago`;
 
   const postTitle = document.createElement("h6");
   postTitle.className = "fw-semibold mb-2";
@@ -99,6 +127,9 @@ function createPostElements(post) {
   const editBtn = document.createElement("button");
   editBtn.className = "btn btn-light px-3 py-1 border";
   editBtn.innerHTML = '<i class="fas fa-edit me-2"></i>Edit';
+  editBtn.addEventListener("click", async () => {
+    editPost(post);
+  });
 
   const deleteBtn = document.createElement("button");
   deleteBtn.className = "btn btn-light px-3 py-1 border";
@@ -130,13 +161,74 @@ function createPostElements(post) {
   return row;
 }
 
+async function editPost(post) {
+  // localStorage.clear("authorName");
+  try {
+    const res = await fetch(`http://localhost:3000/posts/${post.id}`);
+    const data = await res.json();
+
+    authorInput.value = data.author;
+    titleInput.value = data.title;
+    textInput.value = data.post;
+
+    editBtn.addEventListener("click", async () => {
+      try {
+        await fetch(`http://localhost:3000/posts/${post.id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            title: titleInput.value.trim(),
+            post: textInput.value.trim(),
+          }),
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+    // console.log(data.title);
+  } catch (err) {
+    console.log(err);
+  }
+}
+async function updatePost() {}
 async function loadPostAndDisplayPosts() {
   const displayPost = document.querySelector("#post-container");
   const data = await fetchPosts();
+  const postCounter = document.querySelector("#postCounter");
+  postCounter.textContent = data.length;
 
   data.forEach((post) => {
     const element = createPostElements(post);
     displayPost.appendChild(element);
   });
 }
-document.addEventListener("DOMContentLoaded", loadPostAndDisplayPosts());
+
+document.addEventListener("DOMContentLoaded", () => {
+  saveAuthor();
+  loadPostAndDisplayPosts();
+  // viewCounter();
+});
+
+async function viewCounter() {
+  try {
+    const res = await fetch("http://localhost:3000/counter");
+    const data = await res.json();
+
+    const counterShow = document.querySelector("#view-counter");
+
+    let count = parseInt(data[0].views) + 1;
+
+    await fetch("http://localhost:3000/counter/1c6f", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        views: count,
+      }),
+    });
+
+    counterShow.textContent = count;
+  } catch (err) {
+    console.log("View counter update failed!");
+  }
+}
